@@ -39,12 +39,18 @@ Route::get('userid/{id}', function ($id) {
 }); //->where('id', '[0-9]+');
 
 //route group
-
-
-
 Route::group(['prefix' => 'admin'], function () {
     Route::get('users', function ()    {
         // Matches The "/admin/users" URL
         return 'prefix_admin';
     });
 });
+Route::get('addProduct', function() {
+	$product = new App\product();
+	$product->name = "prodcut 1";
+	$product->image = "abcde";
+	$product->price = 1000;
+	$product->save();
+	echo "Add product ok";
+});
+Route::resource('Product','ProductController');

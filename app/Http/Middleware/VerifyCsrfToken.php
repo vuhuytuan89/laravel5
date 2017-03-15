@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        // cho phép tất cả controller truy cập từ bên ngoài
+    	'*'
     ];
 }
