@@ -11,6 +11,7 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
@@ -54,3 +55,56 @@ Route::get('addProduct', function() {
 	echo "Add product ok";
 });
 Route::resource('Product','ProductController');
+
+Route::get('demo', function(){
+	return view('test.demo');
+});
+Route::get('demo2', function(){
+	return view('test.demo2');
+});
+View::share('title', 'this is title');
+View::composer(['test.demo2', 'test.demo'], function($view) {
+	return $view->with('thongtin', 'Mr.Tuấn');
+});
+Route::get('check-view', function() {
+	if (view()->exists('test.demo2')) {
+		echo 'exists';
+	} else {
+		echo 'not exists';
+	}
+});
+*/
+
+
+Route::get('/', function () {
+	//layout default
+    return view('layouts.home');
+});
+Route::get('/product', function () {
+    return view('layouts.product');
+});
+Route::get('/news', function () {
+    return view('layouts.news');
+});
+Route::get('/contact', function () {
+    return view('layouts.contact');
+});
+// URL
+Route::get('url/full', function() {
+	return URL::full();
+	//http://localhost/laravel5/public/url/full
+});
+Route::get('linkCss', function() {
+	//return asset('layout/style.css'); // use http://
+	return asset('layout/style.css', true); // use https://
+});
+
+Route::group(['middleware' => ['web'], 'prefix' => 'admincp'], function() {
+	//Dashboard Route
+	Route::get('dashboard', function() {
+		//return view();
+	});
+	Route::get('login', function() {
+		//return view();
+	});
+});
