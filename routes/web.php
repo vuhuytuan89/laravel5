@@ -108,3 +108,56 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admincp'], function() {
 		//return view();
 	});
 });
+
+//schema
+Route::get('schema/create', function () {
+	Schema::create('tbdemo', function($table) {
+		$table->increments('id');
+		$table->string('tenmonhoc');
+		$table->integer('gia');
+		$table->text('ghichu')->nullable();
+		$table->timestamps();
+	});
+});
+
+Route::get('schema/rename', function() {
+	Schema::rename('tbdemo', 'tbmonhoc');
+});
+Route::get('schema/drop', function() {
+	Schema::drop('tbdemo');
+});
+Route::get('schema/drop-exists', function() {
+	Schema::dropIFExists('tbdemo');
+});
+Route::get('schema/chang-col-attr', function() {
+	Schema::table('tbmonhoc', function ($table) {
+		//chuyen 255->50 char
+		$table->string('tenmonhoc', 50)->change();
+	});
+});
+Route::get('schema/drop-col', function () {
+	Schema::table('tbmonhoc', function ($table) {
+		//$table->dropColumn('ghichu');
+		$table->dropColumn(['tenmonhoc', 'gia']);
+	});
+});
+
+//foreign keys
+Route::get('schema/cate', function () {
+	Schema::create('category', function ($table) {
+		$table->increments('id');
+		$table->string('name');
+		$table->timestamps();
+	});
+});
+
+Route::get('schema/product', function () {
+	Schema::create('sanpham', function ($table) {
+		$table->increments('id');
+		$table->string('name');
+		$table->integer('price');
+		$table->integer('cat_id')->unsigned();
+		$table->foreign('cat_id')->references('id')->on('category')->onDelete('cascade');
+		$table->timestamps();
+	});
+});
