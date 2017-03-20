@@ -1,5 +1,4 @@
-@extends('layouts.home')
-@section('title', 'News')
+@extends('layouts.master')
 @section('content')
-Page news
+    Đây là trang tin tức
 @endsection

@@ -1,5 +1,4 @@
-@extends('layouts.home')
-@section('title', 'Contact')
+@extends('layouts.master')
 @section('content')
-Page Contact
+    Đây là trang liên hệ
 @endsection

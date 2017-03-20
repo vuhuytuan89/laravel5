@@ -76,10 +76,7 @@ Route::get('check-view', function() {
 */
 
 
-Route::get('/', function () {
-	//layout default
-    return view('layouts.home');
-});
+Route::get('/', 'HomeController@index');
 Route::get('/product', function () {
     return view('layouts.product');
 });
