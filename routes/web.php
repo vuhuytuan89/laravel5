@@ -161,3 +161,7 @@ Route::get('schema/product', function () {
 		$table->timestamps();
 	});
 });
+
+
+// migration
+

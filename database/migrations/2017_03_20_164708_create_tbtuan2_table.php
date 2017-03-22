@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrateTableProduct extends Migration
+class CreateTbtuan2Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CrateTableProduct extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('product', function(Blueprint $table) {
+        Schema::create('tbtuan2', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->longtext('image');
-            $table->integer('price');
+            $table->string('hoten');
+            $table->string('sdt');
             $table->timestamps();
         });
     }
@@ -30,7 +28,6 @@ class CrateTableProduct extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('Product');
+        Schema::dropIfExists('tbtuan2');
     }
 }
