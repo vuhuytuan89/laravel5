@@ -162,6 +162,131 @@ Route::get('schema/product', function () {
 	});
 });
 
+Route::get('query/select-all', function () {
+	$data = DB::table('product')->get();
+	echo "<pre>"; print_r($data);
+});
 
+Route::get('query/select-colunm', function () {
+	$data = DB::table('product')->select('name', 'image')->where('id','4')->get();
+	echo "<pre>"; print_r($data);
+});
+
+Route::get('query/where-or', function () {
+	$data = DB::table('product')->select('name', 'image')->where('id','3')->orWhere('price', 1000)->get();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/where-and', function () {
+	$data = DB::table('product')->select('name', 'image')->where('id','3')->Where('price', 8000)->get();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/order', function () {
+	$data = DB::table('product')->orderBy('id', 'desc')->get();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/limit', function () {
+	//offset & limit
+	$data = DB::table('product')->orderBy('id', 'asc')->skip(2)->take(3)->get();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/between', function () {
+	//offset & limit
+	$data = DB::table('product')->whereBetween('id', [2,4])->get();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/notBetween', function () {
+	//offset & limit
+	$data = DB::table('product')->whereNotBetween('id', [2,4])->get();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/whereIn', function () {
+	$data = DB::table('product')->whereIN('id', [2,3,4])->get();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/whereNotIn', function () {
+	$data = DB::table('product')->whereNotIN('id', [2,3,4])->get();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/count', function () {
+	$data = DB::table('product')->count();
+	echo "<pre>"; print_r($data);
+});
+Route::get('query/max', function () {
+	// gia max nhat
+	$data = DB::table('product')->min('price');
+	//$data = DB::table('product')->max('price');
+	echo "<pre>"; print_r($data);
+});
+// tính trung bình
+Route::get('query/avg', function () {
+	// gia max nhat
+	$data = DB::table('product')->avg('id');
+	echo "<pre>"; print_r($data);
+});
+
+Route::get('query/sum', function () {
+	// gia max nhat
+	$data = DB::table('product')->sum('id');
+	echo "<pre>"; print_r($data);
+});
+
+/*
+ * join
+ */
+// tạo table
+Route::get('create_tableCateNew', function() {
+	Schema::create('cat_news', function ($table) {
+		$table->increments('id');
+		$table->string('name');
+		$table->timestamps();
+	});
+	Schema::create('news', function ($table) {
+		$table->increments('id');
+		$table->string('name');
+		$table->integer('price');
+		$table->integer('cat_id')->unsigned();
+		$table->timestamps();
+	});
+});
+
+Route::get('queryjoin', function () {
+	$data = DB::table('news')->join('cat_news', 'news.cat_id', '=' , 'cat_news.id')->get();
+	echo "<pre>"; print_r($data);
+});
+
+Route::get('queryInsert', function () {
+	DB::table('product') -> insert([
+		'name' => 'tivi sony',
+		'image' => 'images',
+		'price' => 100000
+	]);
+	echo "insert thanh cong";
+});
+Route::get('queryInsertMuti', function () {
+	DB::table('product') -> insert([
+		['name' => 'tivi sony', 'image' => 'images', 'price' => 100000 ],
+		['name' => 'tivi panasonic', 'image' => 'images', 'price' => 200000 ],
+		['name' => 'tivi samsug', 'image' => 'images', 'price' => 300000 ],
+	]);
+	echo "insert thanh cong";
+});
 // migration
 
+Route::get('queryInsertGetID', function () {
+	$id = DB::table('product') -> insertGetId([
+		'name' => 'tivi sony',
+		'image' => 'images',
+		'price' => 100000
+	]);
+	echo "insert thanh cong".$id;
+});
+
+Route::get('queryUpdate', function () {
+	DB::table('product')->where('id', 2) -> update(['name' => 'tivi lg', 'image' => 'images', 'price' => 100000 ]);
+	echo "update thanh cong";
+});
+
+Route::get('queryDelete', function () {
+	DB::table('product')->where('id', 16)-> delete();
+	echo "Delete thanh cong";
+});
