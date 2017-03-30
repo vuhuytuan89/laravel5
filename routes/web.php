@@ -254,6 +254,11 @@ Route::get('queryjoin', function () {
 	echo "<pre>"; print_r($data);
 });
 
+Route::get('queryjoin2', function () {
+	$data = DB::table('sanpham')->join('category', 'sanpham.cat_id', '=' , 'category.id')->get();
+	echo "<pre>"; print_r($data);
+});
+
 Route::get('queryInsert', function () {
 	DB::table('product') -> insert([
 		'name' => 'tivi sony',
@@ -289,4 +294,87 @@ Route::get('queryUpdate', function () {
 Route::get('queryDelete', function () {
 	DB::table('product')->where('id', 16)-> delete();
 	echo "Delete thanh cong";
+});
+
+
+//ORM
+
+Route::get('model/select-all', function() {
+	//$data = App\Product::all()->toArray();
+	$data = App\Product::all()->toJson();
+	echo "<pre>"; print_r($data);
+});
+Route::get('model/select-id', function() {
+	$data = App\Product::find(1)->toArray();
+	echo "<pre>"; print_r($data);
+});
+
+Route::get('model/where', function () {
+	$data = App\Product::where('price',1000)->get()->toArray();
+	echo "<pre>"; print_r($data);
+});
+
+Route::get('model/limit', function() {
+	$data = App\Product::where('price', 1000)->take(1)->get()->toArray();
+	echo "<pre>"; print_r($data);
+});
+Route::get('model/count', function () {
+	$data = App\Product::where('price',1000)->count();
+	echo "<pre>"; print_r($data);
+});
+Route::get('model/whereRaw', function () {
+	// price = 1000 and id = 1
+	$data = App\Product::whereRaw('price = ? AND id = ?', [1000,1])->select('name')->get()->toArray();
+	echo "<pre>"; print_r($data);
+});
+
+Route::get('model/insert', function () {
+	$product = new App\Product;
+	$product->name = 'Quần dài';
+	$product->price = "10000";
+	$product->image = "images";
+	$product->save();
+	echo "finish";
+});
+Route::get('model/create', function () {
+	$data  = array(
+		'name'=>'Quần kaki 1', 
+		'image' => 'image 123', 
+		'price'=> 2000,
+		'text' => '123'
+		);
+	App\Product::create($data);
+	echo "finish";
+});
+
+Route::get('model/update', function () {
+	$data = App\Product::find(2);
+	$data->name = 'new name';
+	$data->image = 'new image';
+	$data->save();
+	echo "finish";
+});
+
+Route::get('model/delete', function() {
+	$data = App\Product::destroy(1);
+	echo $data;
+});
+
+Route::get('relation/one-many-1', function () {
+	$data = App\Product::find(2)->images()->get()->toArray();
+	echo '<pre>'; var_dump($data);
+});
+Route::get('relation/one-many-2', function () {
+	$data = App\Image::find(5)->product()->get()->toArray();
+	echo '<pre>'; var_dump($data);
+});
+
+Route::get('relation/many-many-1', function () {
+	$data = App\Car::find(1)->color()->get()->toArray();
+	echo '<pre>'; var_dump($data);
+});
+
+Route::get('relation/many-many-2', function () {
+	$data = App\Color::find(1)->car()->get()->toArray();
+	echo '<pre>'; var_dump($data);
 });

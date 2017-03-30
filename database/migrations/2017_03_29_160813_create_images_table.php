@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTbtuan2Table extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTbtuan2Table extends Migration
      */
     public function up()
     {
-        Schema::create('tbtuan2', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('hoten');
-            $table->string('sdt');
+            $table->string('name');
+            $table->integer('product_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTbtuan2Table extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbtuan2');
+        Schema::dropIfExists('images');
     }
 }
