@@ -11,11 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         $this->call('ImagesTableSeeder');
 		$this->call('CarTableSeeder');
 		$this->call('ColorTableSeeder');
 		$this->call('CarColorTableSeeder');
+		$this->call('MemberTableSeeder');
+
     }
 }
 
@@ -70,6 +72,18 @@ class CarColorTableSeeder extends Seeder
 			['car_id' => 3, 'color_id' => 2],
 			['car_id' => 4, 'color_id' => 3],
 			['car_id' => 5, 'color_id' => 4],
+		]);
+	}
+}
+
+class MemberTableSeeder extends Seeder
+{
+	public function run()
+	{
+		DB::table('members')->insert([
+			['user' => 'Tuan', 'pass' => Hash::make('123456'), 'level'=> 1],
+			['user' => 'Teo', 'pass' => Hash::make('123456'), 'level'=> 2],
+			['user' => 'Tuan', 'pass' => Hash::make('123456'), 'level'=> 3],
 		]);
 	}
 }

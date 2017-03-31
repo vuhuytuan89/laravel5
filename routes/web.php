@@ -378,3 +378,50 @@ Route::get('relation/many-many-2', function () {
 	$data = App\Color::find(1)->car()->get()->toArray();
 	echo '<pre>'; var_dump($data);
 });
+
+// route
+Route::get('response/demo', ['as' => 'response', function () {
+	return view('response.demo');
+}]);
+Route::get('response/redirect', function () {
+	// redirect url
+	//return redirect('response/demo');
+	// redirect route
+	// return redirect()->route('response');
+	//redirect with messeage
+	return redirect()->route('response')->with([
+		'level' => '1',
+		'messeage' => 'This is msg'
+	]);
+});
+//quay lai url trước đó
+Route::get('response/back',  function () {
+	return redirect()->back();
+});
+Route::get('response/download',  function () {
+	$url = 'download/test.txt';
+	return Response::download($url);
+});
+// dowload xong del file, chỉ download 1 lần
+Route::get('response/downloadAndDel',  function () {
+	$url = 'download/test.txt';
+	return Response::download($url)->deleteFileAfterSend(true);
+});
+
+// cái này bị lỗi
+Route::get('response/macro/cap', function () {
+	return response()->caps('foo');
+});
+
+Route::get('authen/login', ['as' => 'getlogin', 'uses' =>'MemberController@getLogin']);
+Route::post('authen/login', ['as' => 'postlogin', 'uses' =>'MemberController@postLogin']);
+
+
+//php artisan make:auth , sẽ tự tạo trang đăng ký đăng nhập
+Auth::routes();
+Route::get('/home', 'HomeController@index');
+
+
+//
+Route::get('authentication/getRegister', ['as' => 'getRegister', 'Auth@getRegister']);
+Route::post('authentication/postRegister', ['as' => 'postRegister', 'Auth@postRegister']);
