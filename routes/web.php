@@ -11,69 +11,10 @@
 |
 */
 
-/*
+
 Route::get('/', function () {
     return view('welcome');
 });
-
-
-Route::get('user/profile', [
-	'as' => 'profile',
-	'uses' => 'UserController@showProfile'
-	]);
-// tham số bắt buộc
-Route::get('user/{id}', function ($id) {
-	return 'User '.$id;
-});
-// định nghĩa nhiều tham số
-
-// dấu hỏi sau tham số: có nghĩa là tham số đó có thể có hoặc k. (không bắt buộc)
-Route::get('posts/{post}/comments/{comment?}', function ($postId, $commentId=null) {
-    return $postId .'='. $commentId;
-});
-// Ràng buộc
-Route::get('name/{name}', function ($name) {
-	return 'Name = '.$name;
-})->where('name', '[A-Za-z]+');
-Route::get('userid/{id}', function ($id) {
-	return 'ID= '. $id;
-}); //->where('id', '[0-9]+');
-
-//route group
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('users', function ()    {
-        // Matches The "/admin/users" URL
-        return 'prefix_admin';
-    });
-});
-Route::get('addProduct', function() {
-	$product = new App\product();
-	$product->name = "prodcut 1";
-	$product->image = "abcde";
-	$product->price = 1000;
-	$product->save();
-	echo "Add product ok";
-});
-Route::resource('Product','ProductController');
-
-Route::get('demo', function(){
-	return view('test.demo');
-});
-Route::get('demo2', function(){
-	return view('test.demo2');
-});
-View::share('title', 'this is title');
-View::composer(['test.demo2', 'test.demo'], function($view) {
-	return $view->with('thongtin', 'Mr.Tuấn');
-});
-Route::get('check-view', function() {
-	if (view()->exists('test.demo2')) {
-		echo 'exists';
-	} else {
-		echo 'not exists';
-	}
-});
-*/
 
 
 Route::get('/', 'HomeController@index');
@@ -104,4 +45,11 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admincp'], function() {
 	Route::get('login', function() {
 		//return view();
 	});
+});
+
+Route::get('admin/login', function() {
+	return view('admin.login');
+});
+Route::get('admin/home', function() {
+	return view('admin.master');
 });
