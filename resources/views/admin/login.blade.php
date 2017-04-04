@@ -31,15 +31,29 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        @if (count($errors) >0)
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li class="text-danger"> {{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
 
-        <form action="../../index2.html" method="post">
+        @if (session('status'))
+            <ul>
+                <li class="text-danger"> {{ session('status') }}</li>
+            </ul>
+        @endif
+
+
+        <form action="" method="post">
+            {{ csrf_field() }}
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" class="form-control" name="txtEmail" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" name="txtPassword">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -58,9 +72,7 @@
             </div>
         </form>
         <!-- /.social-auth-links -->
-
         <a href="#">I forgot my password</a><br>
-
     </div>
     <!-- /.login-box-body -->
 </div>

@@ -27,29 +27,28 @@ Route::get('/news', function () {
 Route::get('/contact', function () {
     return view('layouts.contact');
 });
-// URL
-Route::get('url/full', function() {
-	return URL::full();
-	//http://localhost/laravel5/public/url/full
-});
-Route::get('linkCss', function() {
-	//return asset('layout/style.css'); // use http://
-	return asset('layout/style.css', true); // use https://
-});
+/*
+Route::get('admincp', ['as' => 'adminIndex', function() {
+	return view('admin.home');
+}]);
+*/
 
-Route::group(['middleware' => ['web'], 'prefix' => 'admincp'], function() {
-	//Dashboard Route
-	Route::get('dashboard', function() {
-		//return view();
-	});
-	Route::get('login', function() {
-		//return view();
-	});
-});
 
-Route::get('admin/login', function() {
-	return view('admin.login');
-});
-Route::get('admin/home', function() {
-	return view('admin.master');
+Route::get('admincp/login', ['as' => 'getLogin', 'uses' => 'Admin\AdminLoginController@getLogin']);
+Route::post('admincp/login', ['as' => 'postLogin', 'uses' => 'Admin\AdminLoginController@postLogin']);
+Route::get('admincp/logout', ['as' => 'getLogout', 'uses' => 'Admin\AdminLoginController@getLogout']);
+
+//Route::get('login', ['as' => 'login', 'uses' => 'Admin\AdminLoginController@getLogin']);
+
+//Route::group(['middleware' => 'auth', 'prefix' => 'admincp'], function() {
+//	Route::get('/', function() {
+//		return view('admin.home');
+//	});
+//});
+Route::group(['middleware' => 'auth'], function() {
+	Route::group(['prefix' => 'admincp'], function() {
+		Route::get('/', function() {
+			return view('admin.home');
+		});
+	});
 });
