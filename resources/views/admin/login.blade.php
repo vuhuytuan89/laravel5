@@ -46,7 +46,7 @@
         @endif
 
 
-        <form action="" method="post">
+        <form action="{{ route('getLogin') }}" method="post">
             {{ csrf_field() }}
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="txtEmail" placeholder="Email">

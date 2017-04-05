@@ -9,7 +9,7 @@ use Auth;
 use App\User;
 class AdminLoginController extends Controller
 {
-    
+    protected $redirectTo = '/home';
     public function getLogin()
     {
         if (Auth::check()) {
