@@ -33,10 +33,10 @@ Route::get('admincp/logout', ['as' => 'getLogout', 'uses' => 'Admin\AdminLoginCo
 
 
 Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admincp', 'namespace' => 'Admin'], function() {
-	Route::get('/', function() {
-		return view('admin.home');
-	});
-	Route::resource('Users', 'UserController');
+	Route::get('/', 'AdminHomeController@index');
+	//Route::controller('Users', 'UserController');
+	Route::resource('user', 'AdminUserController');
+	//Route::get('user', 'AdminUserController@index');
 });
 Auth::routes();
 Route::get('/home', function() {
