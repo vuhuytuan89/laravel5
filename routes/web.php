@@ -36,7 +36,7 @@ Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admincp', 'namespa
 	Route::get('/', 'AdminHomeController@index');
 	//Route::controller('Users', 'UserController');
 	Route::resource('user', 'AdminUserController');
-	//Route::get('user', 'AdminUserController@index');
+    Route::resource('category', 'AdminCategoryController');
 });
 Auth::routes();
 Route::get('/home', function() {

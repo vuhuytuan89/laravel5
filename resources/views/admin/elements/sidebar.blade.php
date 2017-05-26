@@ -40,6 +40,13 @@
                </a>
             </li>
 
+            <li class="active">
+                <a href="{{ url('admincp/category') }}">
+                    <i class="fa fa-list"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+
             <li>
                 <a href="#">
                     <i class="fa fa-envelope"></i> <span>Mailbox</span>

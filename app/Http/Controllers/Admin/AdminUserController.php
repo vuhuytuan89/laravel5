@@ -29,8 +29,6 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        // $listUser = User::all();
-        //$listUser = User::orderBy('id', 'desc')->get();
         $listUser = DB::table('users')
             ->orderBy('id', 'desc')
             ->paginate(10);//phan trang

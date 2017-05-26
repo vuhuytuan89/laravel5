@@ -18,13 +18,13 @@
             <i class="fa fa-plus"></i>
             <span>Add User</span>
         </a>
-        <p style="height: 30px"></p>
-
+        <p style="height: 5px"></p>
         @if (Session::has('message'))
+
                 <div class="alert alert-info"> {{ Session::get('message') }}</div>
         @endif
 
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." class="form-control">
+        <input type="text" id="myInput" onkeyup="searchByColumnNo('1')" placeholder="Search for names.." class="form-control">
         <!-- Default box -->
         <div class="box">
 
@@ -65,7 +65,7 @@
                                                 <!--<a href="#" class="btn btn-default bg-red" onclick="delUser('{{ $user->id }}');"></a>-->
                                                 <a href="#" class="btn btn-default bg-red btnDelete" data-value="{{ $user->id }}">
                                                     <i class="fa fa-edit"></i>
-                                                    <span>Edits</span>
+                                                    <span>Delete</span>
                                                 </a>
                                             </div>
                                         </td>
@@ -133,26 +133,6 @@
 
             });
         });
-        function myFunction() {
-            // Declare variables
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
     </script>
 
 @endsection
