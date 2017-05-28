@@ -119,7 +119,6 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo 'update';
         $rule = [
             'txtName' => 'required',
             'txtEmail' => 'required|email|unique:users,email,'.$id,
@@ -140,7 +139,6 @@ class AdminUserController extends Controller
             $user->level = Input::get('level');
             $user->status = Input::get('status');
             $user->save();
-
             Session::flash('message', "Successfully edit user");
             return Redirect::to('admincp/user');
         }

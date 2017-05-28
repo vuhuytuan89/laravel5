@@ -24,7 +24,7 @@
 <section class="content">
     <a href="{{ url('admincp/category/create') }}" class="btn btn-success">
         <i class="fa fa-plus"></i>
-        <span>Add User</span>
+        <span>Add Category</span>
     </a>
     <p style="height: 5px"></p>
     @if (Session::has('message'))
@@ -41,34 +41,24 @@
                         <tr role="row">
                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">ID</th>
                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">Name</th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Email</th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Level</th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Status</th>
+                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Slug</th>
                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Actions</th></tr>
                         </thead>
                         <tbody>
-                        @if (count($listUser) >0)
-                            @foreach($listUser as $user)
+                        @if (isset($listCate) && count($listCate) >0)
+                            @foreach($listCate as $cate)
                                 <tr role="row" class="odd">
-                                    <td>{{ $user->id }}</td>
-                                    <td class="sorting_1">{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->level }}</td>
-                                    <td>
-                                        @if ($user->status == 1)
-                                            <span class="btn bg-green">Active</span>
-                                        @else
-                                            <span class="btn bg-yellow">Inactive</span>
-                                        @endif
-                                    </td>
+                                    <td>{{ $cate->id }}</td>
+                                    <td class="sorting_1">{{ $cate->name }}</td>
+                                    <td>{{ $cate->slug }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{ url('admincp/user')}}/{{ $user->id }}/edit" class="btn btn-default bg-purple">
+                                            <a href="{{ url('admincp/category')}}/{{ $cate->id }}/edit" class="btn btn-default bg-purple">
                                                 <i class="fa fa-edit"></i>
                                                 <span>Edits</span>
                                             </a>
-                                            <!--<a href="#" class="btn btn-default bg-red" onclick="delUser('{{ $user->id }}');"></a>-->
-                                            <a href="#" class="btn btn-default bg-red btnDelete" data-value="{{ $user->id }}">
+                                            <!--<a href="#" class="btn btn-default bg-red" onclick="delUser('{{ $cate->id }}');"></a>-->
+                                            <a href="#" class="btn btn-default bg-red btnDelete" data-value="{{ $cate->id }}">
                                                 <i class="fa fa-edit"></i>
                                                 <span>Delete</span>
                                             </a>
@@ -80,7 +70,7 @@
                         </tbody>
                     </table>
                     <div style="float:right">
-                        {!! $listUser->render() !!}
+                        {!! $listCate->render() !!}
                     </div>
                 </div>
             </div>
@@ -125,7 +115,7 @@
                     .modal({ backdrop: 'static', keyboard: false })
                     .one('click', '#delete', function (e) {
                         //delete function
-                        var actionLink = "{{ url('admincp/user')}}/"+ userId;
+                        var actionLink = "{{ url('admincp/category')}}/"+ userId;
                         $('#formDelete').attr('action', actionLink).submit();
                     });
             });
