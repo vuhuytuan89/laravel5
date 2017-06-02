@@ -68,12 +68,12 @@ class AdminCategoryController extends Controller
         } else {
             $category = new Category;
             $category->name = Input::get('txtName');
-            $category->slug = Input::get('txtSlug');
+            $category->alias = Input::get('txtSlug');
             $category->desc = Input::get('txtDesc');
             $category->parent_id = Input::get('parent_id');
             $category->meta_title = Input::get('meta_title');
-            $category->meta_keywords = Input::get('meta_keywords');
-            $category->meta_description = Input::get('meta_description');
+            $category->meta_key= Input::get('meta_keywords');
+            $category->meta_desc= Input::get('meta_description');
             $category->save();
             Session::flash('message', "Successfully created category");
             return Redirect::to('admincp/category');
@@ -128,12 +128,12 @@ class AdminCategoryController extends Controller
         } else {
             $category = Category::find($id);
             $category->name = Input::get('txtName');
-            $category->slug = Input::get('txtSlug');
+            $category->alias = Input::get('txtSlug');
             $category->desc = Input::get('txtDesc');
             $category->parent_id = Input::get('parent_id');
             $category->meta_title = Input::get('meta_title');
-            $category->meta_keywords = Input::get('meta_keywords');
-            $category->meta_description = Input::get('meta_description');
+            $category->meta_key = Input::get('meta_keywords');
+            $category->meta_desc = Input::get('meta_description');
             $category->save();
             Session::flash('message', "Successfully edited category");
             return Redirect::to('admincp/category');

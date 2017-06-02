@@ -37,6 +37,7 @@ Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admincp', 'namespa
 	//Route::controller('Users', 'UserController');
 	Route::resource('user', 'AdminUserController');
     Route::resource('category', 'AdminCategoryController');
+    Route::resource('product', 'AdminProductController');
 });
 Auth::routes();
 Route::get('/home', function() {

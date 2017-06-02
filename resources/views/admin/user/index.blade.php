@@ -113,13 +113,6 @@
 
 @section('page-js-script')
     <script type="text/javascript">
-        /*function delUser(id)
-         {
-         alert
-         var actionLink = "{{ url('admincp/user')}}/"+ id;
-         document.getElementById('formDelete').action = actionLink;
-         document.getElementById('formDelete').submit();
-         }*/
         $(document).ready(function() {
             $('.btnDelete').click(function(){
                 var userId = $(this).attr('data-value');
@@ -130,7 +123,6 @@
                         var actionLink = "{{ url('admincp/user')}}/"+ userId;
                         $('#formDelete').attr('action', actionLink).submit();
                     });
-
             });
         });
     </script>

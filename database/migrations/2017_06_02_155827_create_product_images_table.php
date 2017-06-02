@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrateTableProduct extends Migration
+class CreateProductImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CrateTableProduct extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('product', function(Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->longtext('image');
-            $table->integer('price');
+            $table->integer('product_id');
+            $table->string('image_path');
+            $table->string('title')->nullable();
+            $table->string('alt')->nullable();
             $table->timestamps();
         });
     }
@@ -30,7 +30,6 @@ class CrateTableProduct extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('Product');
+        Schema::dropIfExists('product_images');
     }
 }

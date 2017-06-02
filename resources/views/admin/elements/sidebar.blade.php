@@ -40,10 +40,17 @@
                </a>
             </li>
 
-            <li class="active">
+            <li class="">
                 <a href="{{ url('admincp/category') }}">
                     <i class="fa fa-list"></i>
                     <span>Categories</span>
+                </a>
+            </li>
+
+            <li class="">
+                <a href="{{ url('admincp/product') }}">
+                    <i class="fa fa-list"></i>
+                    <span>Products</span>
                 </a>
             </li>
 

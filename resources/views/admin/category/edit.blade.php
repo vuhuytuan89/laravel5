@@ -8,8 +8,6 @@
 ?>
 @extends('admin.master')
 @section('content')
-@extends('admin.master')
-@section('content')
 	 <section class="content-header">
         <h1>
             Edit Category
@@ -39,7 +37,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label>Slug</label>
-                        <input type="text" name="txtSlug" class="form-control"  value="{{ $category->slug }}">
+                        <input type="text" name="txtSlug" class="form-control"  value="{{ $category->alias }}">
                     </div>
                     <div class="form-group col-md-12">
                         <label>Desc</label>
@@ -61,8 +59,8 @@
                     <div class="form-group col-md-12">
                     	<fieldset>  <legend>SEO:</legend>
                     	SEO Title <input type="text" name="meta_title" class="form-control"  value="{{ $category->meta_title }}">
-                    	Meta Keywords <input type="text" name="meta_keywords" class="form-control"  value="{{ $category->meta_keywords }}">
-                    	Meta Description <input type="text" name="meta_description" class="form-control"  value="{{ $category->meta_description }}">
+                    	Meta Keywords <input type="text" name="meta_keywords" class="form-control"  value="{{ $category->meta_key }}">
+                    	Meta Description <input type="text" name="meta_description" class="form-control"  value="{{ $category->meta_desc }}">
                     </fieldset>
 
                     </div>
@@ -76,6 +74,4 @@
             </div>
         </form>
     </section>
-@endsection
-
 @endsection
