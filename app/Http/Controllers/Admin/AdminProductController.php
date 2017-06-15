@@ -35,7 +35,10 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-
+        $this->data['title'] = 'Add new product';
+        $listCate = DB::table('categories')->orderBy('id', 'desc')->get();
+        $this->data['listCate'] = $listCate;
+        return view('admin.product.create', $this->data);
     }
 
     /**
@@ -47,13 +50,27 @@ class AdminProductController extends Controller
     public function store(Request $request)
     {
         $rule = [
-            'txtName' => 'required'
+            'txtName' => 'required',
+            'txtPrice' => 'nullable|numeric'
         ];
         $validator = Validator::make(Input::all(), $rule);
         if  ($validator->fails()) {
-            return Redirect::to('admincp/product/edit');
+            return Redirect::to('admincp/product/create')
+                ->withErrors($validator)
+                ->withInput(Input::all());
         } else {
             $product = new Product;
+            $product->name = $request->input('txtName');
+            $product->alias = convertTitleToAlias($request->input('txtName'));
+            $product->desc = $request->input('txtDesc');
+            $product->content = $request->input('txtContent');
+            $product->price = $request->input('txtPrice');
+            $product->cate_id = $request->input('cate_id');
+            $product->meta_title = $request->input('meta_title');
+            $product->meta_key = $request->input('meta_key');
+            $product->meta_desc = $request->input('meta_desc');
+            $product->save();
+            return Redirect::to('admincp/product')->with('message','Successfully Add product');
         }
     }
 
@@ -93,15 +110,17 @@ class AdminProductController extends Controller
     public function update(Request $request, $id)
     {
         $rule = [
-            'txtName' => 'required'
+            'txtName' => 'required',
+            'txtPrice' => 'nullable|numeric'
         ];
         $validator = Validator::make(Input::all(), $rule);
         if ($validator->fails()) {
-            return Redirect::to('admincp/product/' . $id . '/edit');
+            return Redirect::to('admincp/product/' . $id . '/edit')
+                ->withErrors($validator)->withInput();
         } else {
             $product = Product::find($id);
             $product->name = $request->input('txtName');
-            $product->alias = $request->input('txtAlias');
+            $product->alias = convertTitleToAlias($request->input('txtName'));
             $product->desc = $request->input('txtDesc');
             $product->content = $request->input('txtContent');
             $product->price = $request->input('txtPrice');
@@ -110,10 +129,8 @@ class AdminProductController extends Controller
             $product->meta_key = $request->input('meta_key');
             $product->meta_desc = $request->input('meta_desc');
             $product->save();
-            Session::flash('message', "Successfully edited product");
-            return Redirect::to('admincp/product');
+            return Redirect::to('admincp/product')->with('message', 'Successfully edited product');
          }
-
     }
 
     /**
@@ -124,6 +141,8 @@ class AdminProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return Redirect::to('admincp/product')->with('message', 'Successfully delete category');
     }
 }

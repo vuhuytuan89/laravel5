@@ -18,7 +18,7 @@
             <li class="active">Edit</li>
         </ol>
     </section>
-    <section class="content ">
+    <section class="content">
         @if(count($errors) >0)
             <ul>
                 @foreach($errors->all() as $error)
@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label>Alias</label>
-                            <input type="text" name="txtAlias" class="form-control"  value="{{ $product->alias }}">
+                            <input type="text" name="txtAlias" class="form-control"  value="{{ $product->alias }}" readonly>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Desc</label>
@@ -61,7 +61,7 @@
                                 <option value="0">---</option>
                                 @foreach($listCate as $cate)
                                     <option value="{{ $cate->id }}"
-                                            @if ($cate->parent_id == $product->cate_id)
+                                            @if ($cate->id == $product->cate_id)
                                             selected="selected"
                                             @endif
                                             >{{ $cate->name }}</option>

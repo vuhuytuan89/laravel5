@@ -64,11 +64,12 @@ class AdminCategoryController extends Controller
         if ($validator->fails())
         {
             return Redirect::to('admincp/category/create')
-                ->withErrors($validator);
+                ->withErrors($validator)
+                ->withInput();
         } else {
             $category = new Category;
             $category->name = Input::get('txtName');
-            $category->alias = Input::get('txtSlug');
+            $category->alias = convertTitleToAlias(Input::get('txtName'));
             $category->desc = Input::get('txtDesc');
             $category->parent_id = Input::get('parent_id');
             $category->meta_title = Input::get('meta_title');
@@ -124,11 +125,12 @@ class AdminCategoryController extends Controller
         if ($validator->fails())
         {
             return Redirect::to('admincp/category/' . $id . '/edit')
-                ->withErrors($validator);
+                ->withErrors($validator)->withInput();
         } else {
             $category = Category::find($id);
             $category->name = Input::get('txtName');
-            $category->alias = Input::get('txtSlug');
+            //$category->alias = Input::get('txtSlug');
+            $category->alias = convertTitleToAlias(Input::get('txtName'));
             $category->desc = Input::get('txtDesc');
             $category->parent_id = Input::get('parent_id');
             $category->meta_title = Input::get('meta_title');

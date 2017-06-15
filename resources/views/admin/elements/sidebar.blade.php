@@ -33,21 +33,21 @@
                     </span>
                 </a>
             </li>
-            <li class="active">
+            <li @if (isset($controllerName) && $controllerName == 'AdminUserController') class="active" @endif>
                <a href="{{ url('admincp/user') }}">
                    <i class="fa fa-user"></i>
                    <span>User</span>
                </a>
             </li>
 
-            <li class="">
+            <li @if (isset($controllerName) && $controllerName == 'AdminCategoryController') class="active" @endif>
                 <a href="{{ url('admincp/category') }}">
                     <i class="fa fa-list"></i>
                     <span>Categories</span>
                 </a>
             </li>
 
-            <li class="">
+            <li @if (isset($controllerName) && $controllerName == 'AdminProductController') class="active" @endif>
                 <a href="{{ url('admincp/product') }}">
                     <i class="fa fa-list"></i>
                     <span>Products</span>

@@ -29,11 +29,9 @@
         <span>Add Product</span>
     </a>
     <p style="height: 5px"></p>
-    @if (Session::has('message'))
-
-        <div class="alert alert-info"> {{ Session::get('message') }}</div>
+    @if (isset($message))
+        <div class="alert alert-info"> {{ $message }}</div>
     @endif
-
     <input type="text" id="myInput" onkeyup="searchByColumnNo('1')" placeholder="Search for names.." class="form-control">
     <!-- Default box -->
     <div class="box">
@@ -44,12 +42,12 @@
                     <table id="myTable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                         <thead>
                         <tr role="row">
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">ID</th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">Name</th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Alias</th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Price</th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Status</th>
-                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Actions</th></tr>
+                            <th class="sorting col-md-1" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="" >ID</th>
+                            <th class="sorting_asc col-md-5" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">Name</th>
+                            <th class="sorting col-md-2" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Alias</th>
+                            <th class="sorting col-md-1" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Price</th>
+                            <th class="sorting col-md-1" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Status</th>
+                            <th class="sorting col-md-2" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="">Actions</th></tr>
                         </thead>
                         <tbody>
                         @if (count($listProduct) >0)
@@ -58,7 +56,7 @@
                                     <td>{{ $product->id }}</td>
                                     <td class="sorting_1">{{ $product->name }}</td>
                                     <td>{{ $product->alias }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>{{ number_format($product->price )}}</td>
                                     <td>
                                         @if ($product->status == 1)
                                             <span class="btn bg-green">Active</span>
@@ -126,12 +124,12 @@
             $('.btnDelete').click(function(){
                 var userId = $(this).attr('data-value');
                 $('#confirm')
-                        .modal({ backdrop: 'static', keyboard: false })
-                        .one('click', '#delete', function (e) {
-                            //delete function
-                            var actionLink = "{{ url('admincp/user')}}/"+ userId;
-                            $('#formDelete').attr('action', actionLink).submit();
-                        });
+                    .modal({ backdrop: 'static', keyboard: false })
+                    .one('click', '#delete', function (e) {
+                        //delete function
+                        var actionLink = "{{ url('admincp/product')}}/"+ userId;
+                        $('#formDelete').attr('action', actionLink).submit();
+                    });
             });
         });
     </script>
