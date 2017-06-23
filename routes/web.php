@@ -38,8 +38,12 @@ Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admincp', 'namespa
 	Route::resource('user', 'AdminUserController');
     Route::resource('category', 'AdminCategoryController');
     Route::resource('product', 'AdminProductController');
+    Route::controller('adminupload', 'Admin\AdminUploadController');
 });
 Auth::routes();
 Route::get('/home', function() {
 	return view('home');
+});
+Route::get('/admincp/upload', function () {
+    return view('admin.product.upload');
 });
