@@ -135,11 +135,57 @@
            autoProcessQueue: true,
            uploadMultiple: true,
            parallelUploads: 5,
-           maxFiles: 5,
-           maxFilesize: 1,
+           maxFiles: 10,
+           maxFilesize: 5,
            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+           dictFileTooBig: 'Image is bigger than 5MB',
            addRemoveLinks: true,
-           dictFileTooBig: 'Image is bigger than 1MB'
+           removedfile: function(file) {
+           var name = file.name;    
+           name =name.replace(/\s+/g, '-').toLowerCase();    /*only spaces*/
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost/laravel5/public/admincp/deleteImg',
+                headers: {
+                     'X-CSRF-TOKEN': '{!! csrf_token() !!}'
+                 },
+                data: "id="+name,
+                dataType: 'html',
+                success: function(data) {
+                    $("#msg").html(data);
+                }
+            });
+          var _ref;
+          if (file.previewElement) {
+            if ((_ref = file.previewElement) != null) {
+              _ref.parentNode.removeChild(file.previewElement);
+            }
+          }
+          return this._updateMaxFilesReachedClass();
+        },
+        previewsContainer: null,
+        hiddenInputContainer: "body",
+
+           /*init: function() {
+            this.on("addedfile", function(file) {
+                // Create the remove button
+                var removeButton = Dropzone.createElement("<button>Remove file</button>");
+                // Capture the Dropzone instance as closure.
+                var _this = this;
+                // Listen to the click event
+                removeButton.addEventListener("click", function(e) {
+                    // Make sure the button click doesn't submit the form:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // Remove the file preview.
+                    _this.removeFile(file);
+                    // If you want to the delete the file on the server as well,
+                    // you can do the AJAX request here.
+                });
+                // Add the button to the file preview element.
+                file.previewElement.appendChild(removeButton);
+            });
+        }*/
        }
        /*
        Dropzone.options.myDropzone = { // The camelized version of the ID of the form element
