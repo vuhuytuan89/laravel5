@@ -13,7 +13,7 @@ class CreateProductsPhotoTable extends Migration
      */
     public function up()
     {
-        Schema::table('productsphoto', function (Blueprint $table) {
+        Schema::create('productsphoto', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
