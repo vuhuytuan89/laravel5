@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProductImage;
 use App\Product;
+use Illuminate\Support\Facades\DB;
+
 class AdminUploadController extends Controller
 {
     //
@@ -21,20 +23,41 @@ class AdminUploadController extends Controller
                 foreach ($request->file('file') as $fileKey => $fileObject ) {
                     // make sure each file is valid
                     if ($fileObject->isValid()) {
-                    	$imageName = $fileObject->getClientOriginalName();
-                    	$extension = $fileObject->getClientOriginalExtension();
-                    	$originalNameWithoutExt = substr($imageName, 0, strlen($imageName) - strlen($extension) - 1);
-                        // make destination file name
-                        $destinationFileName = time() . $fileObject->getClientOriginalName();
-                        // move the file from tmp to the destination path
-                        $fileObject->move($destinationPath, $destinationFileName);
-                        //return response()->json()
-                        // save the the destination filename
-                       
-                        $dbFilenames[$fileKey] = $folderDir . $destinationFileName;
+                        //DB::beginTransaction();
+                        try {
+                            $imageName = $fileObject->getClientOriginalName();
+                            $extension = $fileObject->getClientOriginalExtension();
+                            $originalNameWithoutExt = substr($imageName, 0, strlen($imageName) - strlen($extension) - 1);
+                            // make destination file name
+                            $destinationFileName = time() . $fileObject->getClientOriginalName();
+                            // move the file from tmp to the destination path
+                            $fileObject->move($destinationPath, $destinationFileName);
+
+                            // save the the destination filename
+
+                            $dbFilenames[$fileKey] = $folderDir .'/'. $destinationFileName;
+                            // save table images
+                            $prodcuctImage = new ProductImage;
+                            $prodcuctImage->product_id = '0';
+                            $prodcuctImage->image_path = $folderDir .'/'. $destinationFileName;
+                            //$ProdcuctImage->alias = convertTitleToAlias($request->input('txtName'));
+                            $prodcuctImage->title = $imageName;
+                            $prodcuctImage->alt = $imageName;
+                            $flag = $prodcuctImage->save();
+                            //DB::commit();
+                            $success = true;
+
+                        } catch (\Exception $e) {
+                            $msg = $e->getMessage();
+                            //DB::rollback();
+                            $success = false;
+
+                        }
+                        echo 'ra rồi';
+
+
                     }
                 }
-                $this->_die($dbFilenames);
 
             }
         }
@@ -63,13 +86,19 @@ class AdminUploadController extends Controller
 	    */
 	}
 	function test() {
-		$prodcuctImage = new ProductImage;
-        $ProdcuctImage->image_path ='1';
-        //$ProdcuctImage->alias = convertTitleToAlias($request->input('txtName'));
-        $prodcuctImage->title = '2';
-        $prodcuctImage->alt = '3';
-        $prodcuctImage->save();
-        var_dump($prodcuctImage->save());
+        try {
+            $prodcuctImage = new ProductImage;
+            //$prodcuctImage->product_id ='1';
+            $prodcuctImage->image_path ='1';
+            //$ProdcuctImage->alias = convertTitleToAlias($request->input('txtName'));
+            $prodcuctImage->title = '2';
+            $prodcuctImage->alt = '3';
+            $prodcuctImage->save();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+
+        var_dump($prodcuctImage->save()); die('123');
          $product = new Product;
             $product->name = '1';
             $product->alias = '2';

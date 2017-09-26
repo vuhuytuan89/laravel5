@@ -47,11 +47,11 @@
                         -->
                         <div class="form-group col-md-12">
                             <label>Desc</label>
-                            <textarea name="txtDesc" class="form-control">{{ old('txtDesc') }}</textarea>
+                            <textarea name="txtDesc" class="form-control ">{{ old('txtDesc') }}</textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Content</label>
-                            <textarea name="txtContent" class="form-control">{{ old('txtContent') }}</textarea>
+                            <textarea name="txtContent" class="form-control " id="editor1">{{ old('txtContent') }}</textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Price</label>
@@ -140,6 +140,9 @@
            acceptedFiles: ".jpeg,.jpg,.png,.gif",
            dictFileTooBig: 'Image is bigger than 5MB',
            addRemoveLinks: true,
+           success: function(file, response){
+               console.log(response);
+           },
            removedfile: function(file) {
            var name = file.name;    
            name =name.replace(/\s+/g, '-').toLowerCase();    /*only spaces*/
