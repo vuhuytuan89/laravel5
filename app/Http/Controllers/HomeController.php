@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Product;
 class HomeController extends Controller
 {
     /**
@@ -24,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.home');
+        $this->data['title'] = 'Trang chủ';
+        $product = Product::all();
+        $this->data['listProduct'] = $product;
+        return view('layouts.home', $this->data);
     }
 }

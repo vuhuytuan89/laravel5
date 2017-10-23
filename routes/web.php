@@ -49,3 +49,5 @@ Route::get('/home', function() {
 Route::get('/admincp/upload', function () {
     return view('admin.product.upload');
 });
+
+Route::post('/cart', 'FontController@cart');
