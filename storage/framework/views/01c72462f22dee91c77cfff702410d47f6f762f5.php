@@ -1,5 +1,4 @@
-@extends('layouts.master_full')
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section>
         <div class="container">
             <div class="row">
@@ -27,43 +26,44 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if(count($cart))
-                                        @foreach($cart as $item)
+                                    <?php if(count($cart)): ?>
+                                        <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
                                                 <td class="cart_product" style="margin: 0px">
                                                     <a href=""><img
                                                                 width="100px"
-                                                                src="{{ asset('layouts/images') }}/home/product1.jpg"
+                                                                src="<?php echo e(asset('layouts/images')); ?>/home/product1.jpg"
                                                                 alt=""></a>
                                                 </td>
                                                 <td class="cart_description">
-                                                    <h4><a href="">{{ $item->name }}</a></h4>
+                                                    <h4><a href=""><?php echo e($item->name); ?></a></h4>
 
-                                                    <p>Web ID: {{ $item->id }}</p>
+                                                    <p>Web ID: <?php echo e($item->id); ?></p>
                                                 </td>
                                                 <td class="cart_price">
-                                                    <p>{{ number_format($item->price)}} VNĐ</p>
+                                                    <p><?php echo e(number_format($item->price)); ?> VNĐ</p>
                                                 </td>
                                                 <td class="cart_quantity">
                                                     <div class="cart_quantity_button">
                                                         <a class="cart_quantity_down"
-                                                           href="{{url("cart?product_id=$item->id&increment=1")}}">
+                                                           href="<?php echo e(url("cart?product_id=$item->id&increment=1")); ?>">
                                                             + </a>
                                                         <input class="cart_quantity_input" type="text" name="quantity"
-                                                               value="{{$item->qty}}" autocomplete="off" size="2">
+                                                               value="<?php echo e($item->qty); ?>" autocomplete="off" size="2">
                                                         <a class="cart_quantity_down"
-                                                           href="{{url("cart?product_id=$item->id&decrease=1")}}">
+                                                           href="<?php echo e(url("cart?product_id=$item->id&decrease=1")); ?>">
                                                             - </a>
                                                     </div>
                                                 </td>
                                                 <td class="cart_total">
-                                                    <p class="cart_total_price">{{ number_format($item->subtotal)}}
+                                                    <p class="cart_total_price"><?php echo e(number_format($item->subtotal)); ?>
+
                                                         VNĐ</p>
                                                 </td>
                                                 <td class="cart_delete">
-                                                    <form method="POST" action="{{ url('clear-cart')}}">
-                                                        <input type="hidden" name="product_id" value="{{ $item->id }}">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <form method="POST" action="<?php echo e(url('clear-cart')); ?>">
+                                                        <input type="hidden" name="product_id" value="<?php echo e($item->id); ?>">
+                                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                                         <button type="submit" class="btn btn-fefault add-to-cart">
                                                             <i class="fa  fa-times"></i>
 
@@ -71,11 +71,11 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <td colspan="4">&nbsp;
                                             <span>
-                                            <a class="btn btn-default update" href="{{ url('/')}}">Tiếp tục mua hàng</a>
+                                            <a class="btn btn-default update" href="<?php echo e(url('/')); ?>">Tiếp tục mua hàng</a>
                                             </span>
 
                                             </td>
@@ -84,14 +84,14 @@
                                                     <tbody>
                                                     <tr>
                                                         <td>Tổng :</td>
-                                                        <td><span>{{ $total }} VNĐ</span></td>
+                                                        <td><span><?php echo e($total); ?> VNĐ</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                         <span>
-                                                            <form method="POST" action="{{ url('/clear-all') }}">
+                                                            <form method="POST" action="<?php echo e(url('/clear-all')); ?>">
                                                                 <input type="hidden" name="_token"
-                                                                       value="{{ csrf_token() }}">
+                                                                       value="<?php echo e(csrf_token()); ?>">
                                                                 <button type="submit" class="btn btn-default update">
                                                                     <i class="fa fa-trash-o"> Xóa hết</i>
                                                                 </button>
@@ -100,23 +100,23 @@
                                                         </td>
                                                         <td>
                                                             <a class="btn btn-default check_out"
-                                                               href="{{ url('checkout')}}">Tiếp tục</a></td>
+                                                               href="<?php echo e(url('checkout')); ?>">Tiếp tục</a></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
                                             </td>
                                         </tr>
-                                    @else
+                                    <?php else: ?>
                                         <tr>
                                             <td>You have no items in the shopping cart</td>
                                         </tr>
                                         <tr>
                                             <td colspan="4">&nbsp;
-                                                <a class="btn btn-default update" href="{{ url('/')}}">Tiếp tục mua
+                                                <a class="btn btn-default update" href="<?php echo e(url('/')); ?>">Tiếp tục mua
                                                     hàng</a>
                                             </td>
                                         </tr>
-                                    @endif
+                                    <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -128,4 +128,5 @@
         </div>
     </section>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master_full', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

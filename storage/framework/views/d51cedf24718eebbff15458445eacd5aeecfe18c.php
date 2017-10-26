@@ -6,8 +6,8 @@
  * Time: 4:44 PM
  */
 ?>
-@extends('admin.master')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <section class="content-header">
         <h1>
             Edit Product
@@ -19,16 +19,17 @@
         </ol>
     </section>
     <section class="content ">
-        @if(count($errors) >0)
+        <?php if(count($errors) >0): ?>
             <ul>
-                @foreach($errors->all() as $error)
-                    <li class="text-danger">{{ $error }}</li>
-                @endforeach
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li class="text-danger"><?php echo e($error); ?></li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
-        @endif
+        <?php endif; ?>
         <!-- enctype="multipart/form-data" class="dropzone dz-clickable" -->
-        <form action="{{ url('admincp/product') }}" method="POST" enctype="multipart/form-data">
-            {{ csrf_field() }}
+        <form action="<?php echo e(url('admincp/product')); ?>" method="POST" enctype="multipart/form-data">
+            <?php echo e(csrf_field()); ?>
+
             <div class="col-md-6">
                 <div class="box">
                     <div class="box-header with-border">
@@ -37,38 +38,38 @@
                     <div class="box-body ">
                         <div class="form-group col-md-12">
                             <label>Name</label>
-                            <input type="text" name="txtName" class="form-control" value="{{ old('txtName')}}">
+                            <input type="text" name="txtName" class="form-control" value="<?php echo e(old('txtName')); ?>">
                         </div>
                         <!--
                         <div class="form-group col-md-12">
                             <label>Alias</label>
-                            <input type="text" name="txtAlias" class="form-control"  value="{{ old('txtAlias') }}">
+                            <input type="text" name="txtAlias" class="form-control"  value="<?php echo e(old('txtAlias')); ?>">
                         </div>
                         -->
                         <div class="form-group col-md-12">
                             <label>Desc</label>
-                            <textarea name="txtDesc" class="form-control ">{{ old('txtDesc') }}</textarea>
+                            <textarea name="txtDesc" class="form-control "><?php echo e(old('txtDesc')); ?></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Content</label>
-                            <textarea name="txtContent" class="form-control " id="editor1">{{ old('txtContent') }}</textarea>
+                            <textarea name="txtContent" class="form-control " id="editor1"><?php echo e(old('txtContent')); ?></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Price</label>
                             <input name="txtPrice" class="form-control"
-                                   value="@if(empty(old('txtPrice'))) 0 @else{{old('txtPrice')}}@endif">
+                                   value="<?php if(empty(old('txtPrice'))): ?> 0 <?php else: ?><?php echo e(old('txtPrice')); ?><?php endif; ?>">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Category</label>
                             <select class="form-control" name="cate_id">
                                 <option value="0">---</option>
-                                @foreach($listCate as $cate)
-                                    <option value="{{ $cate->id }}"
-                                        @if ($cate->id == old('cate_id'))
+                                <?php $__currentLoopData = $listCate; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($cate->id); ?>"
+                                        <?php if($cate->id == old('cate_id')): ?>
                                         selected="selected"
-                                        @endif
-                                        >{{ $cate->name }}</option>
-                                @endforeach
+                                        <?php endif; ?>
+                                        ><?php echo e($cate->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
@@ -81,9 +82,9 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group col-md-12">
-                            SEO Title <input type="text" name="meta_title" class="form-control"  value="{{ old('meta_title') }}">
-                            Meta Keywords <input type="text" name="meta_key" class="form-control"  value="{{ old('meta_key') }}">
-                            Meta Description <input type="text" name="meta_desc" class="form-control"  value="{{ old('meta_desc') }}">
+                            SEO Title <input type="text" name="meta_title" class="form-control"  value="<?php echo e(old('meta_title')); ?>">
+                            Meta Keywords <input type="text" name="meta_key" class="form-control"  value="<?php echo e(old('meta_key')); ?>">
+                            Meta Description <input type="text" name="meta_desc" class="form-control"  value="<?php echo e(old('meta_desc')); ?>">
 
                         </div>
                     </div>
@@ -118,15 +119,15 @@
         </form>
 
     </section>
-@endsection
-@section('page-js-script')
-    <link rel="stylesheet" href="{{ asset('admin/dist/css/dropzone.css') }}">
-    <script src="{{ asset('admin/dist/js/dropzone.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('page-js-script'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('admin/dist/css/dropzone.css')); ?>">
+    <script src="<?php echo e(asset('admin/dist/js/dropzone.js')); ?>"></script>
     <script type="text/javascript">
         Dropzone.options.myDropzone = {
             url: 'http://localhost/laravel5/public/admincp/uploadImg',
             headers: {
-                'X-CSRF-TOKEN': '{!! csrf_token() !!}'
+                'X-CSRF-TOKEN': '<?php echo csrf_token(); ?>'
             },
             //paramName: "file",
             //maxThumbnailFilesize: 5,
@@ -151,7 +152,7 @@
                     type: 'POST',
                     url: 'http://localhost/laravel5/public/admincp/deleteImg',
                     headers: {
-                        'X-CSRF-TOKEN': '{!! csrf_token() !!}'
+                        'X-CSRF-TOKEN': '<?php echo csrf_token(); ?>'
                     },
                     data: "id=" + name,
                     dataType: 'html',
@@ -240,4 +241,5 @@
             background: white;
         }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

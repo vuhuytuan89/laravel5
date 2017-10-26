@@ -3,16 +3,36 @@
     <section>
         <div class="container">
             <div class="row">
+                <div class="col-sm-12 clearfix">
+                    <div class="container">
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li class="active">Shopping Cart</li>
+                        </ol>
+                    </div>
+                    <div class="bill-to">
+                        <p>Bill To</p>
+                        <form>
+                            <div class="form-one">
+                                <input type="text" placeholder="Company Name">
+                                <input type="text" placeholder="Email*">
+                                <input type="text" placeholder="First Name *">
+                                <input type="text" placeholder="Last Name *">
+                                <input type="text" placeholder="Address 1 *">
 
+                            </div>
+                            <div class="form-two">
+                                <textarea name="message" placeholder="Notes about your order, Special Notes for Delivery" rows="10"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
                 <div class="col-sm-12">
                     <section id="cart_items">
                         <div class="container">
-                            <div class="breadcrumbs">
-                                <ol class="breadcrumb">
-                                    <li><a href="#">Home</a></li>
-                                    <li class="active">Shopping Cart</li>
-                                </ol>
-                            </div>
+
                             <div class="table-responsive cart_info">
 
                                 <table class="table table-condensed">

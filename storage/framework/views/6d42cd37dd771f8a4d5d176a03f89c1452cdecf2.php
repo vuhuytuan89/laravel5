@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Home | E-Shopper @yield('title')</title>
-    <link href="{{ asset('layouts/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('layouts/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('layouts/css/prettyPhoto.css') }}" rel="stylesheet">
-    <link href="{{ asset('layouts/css/price-range.css') }}" rel="stylesheet">
-    <link href="{{ asset('layouts/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('layouts/css/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('layouts/css/responsive.css') }}" rel="stylesheet">
+    <title>Home | E-Shopper <?php echo $__env->yieldContent('title'); ?></title>
+    <link href="<?php echo e(asset('layouts/css/bootstrap.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('layouts/css/font-awesome.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('layouts/css/prettyPhoto.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('layouts/css/price-range.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('layouts/css/animate.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('layouts/css/main.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('layouts/css/responsive.css')); ?>" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="{{ asset('layouts/js/html5shiv.js') }}"></script>
-    <script src="{{ asset('layouts/js/respond.min.js') }}"></script>
+    <script src="<?php echo e(asset('layouts/js/html5shiv.js')); ?>"></script>
+    <script src="<?php echo e(asset('layouts/js/respond.min.js')); ?>"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="{{ asset('layouts/images') }}/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('layouts/images') }}/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('layouts/images') }}/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('layouts/images') }}/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('layouts/images') }}/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="<?php echo e(asset('layouts/images')); ?>/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo e(asset('layouts/images')); ?>/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo e(asset('layouts/images')); ?>/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo e(asset('layouts/images')); ?>/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<?php echo e(asset('layouts/images')); ?>/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 <body>
 <header id="header"><!--header-->
@@ -56,7 +56,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="{{ asset('layouts/images') }}/home/logo.png" alt="" /></a>
+                        <a href="index.html"><img src="<?php echo e(asset('layouts/images')); ?>/home/logo.png" alt="" /></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
@@ -111,10 +111,10 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="{{ url('/') }}" class="active">Home</a></li>
-                            <li><a href="{{ url('/product') }}">Products</a></li>
-                            <li><a href="{{ url('/news') }}">News</a></li>
-                            <li><a href="{{ url('/contact') }}">Contact</a></li>
+                            <li><a href="<?php echo e(url('/')); ?>" class="active">Home</a></li>
+                            <li><a href="<?php echo e(url('/product')); ?>">Products</a></li>
+                            <li><a href="<?php echo e(url('/news')); ?>">News</a></li>
+                            <li><a href="<?php echo e(url('/contact')); ?>">Contact</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="shop.html">Products</a></li>

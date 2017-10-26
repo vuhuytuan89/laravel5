@@ -13,7 +13,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="{{ asset('layouts/images') }}/home/iframe1.png" alt="" />
+                                    <img src="<?php echo e(asset('layouts/images')); ?>/home/iframe1.png" alt="" />
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -28,7 +28,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="{{ asset('layouts/images') }}/home/iframe2.png" alt="" />
+                                    <img src="<?php echo e(asset('layouts/images')); ?>/home/iframe2.png" alt="" />
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -43,7 +43,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="{{ asset('layouts/images') }}/home/iframe3.png" alt="" />
+                                    <img src="<?php echo e(asset('layouts/images')); ?>/home/iframe3.png" alt="" />
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -58,7 +58,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="{{ asset('layouts/images') }}/home/iframe4.png" alt="" />
+                                    <img src="<?php echo e(asset('layouts/images')); ?>/home/iframe4.png" alt="" />
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="address">
-                        <img src="{{ asset('layouts/images') }}/home/map.png" alt="" />
+                        <img src="<?php echo e(asset('layouts/images')); ?>/home/map.png" alt="" />
                         <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                     </div>
                 </div>
@@ -156,11 +156,11 @@
 
 </footer>
 <!--/Footer-->
-<script src="{{ asset('layouts/js/jquery.js') }}"></script>
-<script src="{{ asset('layouts/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('layouts/js/jquery.scrollUp.min.js') }}"></script>
-<script src="{{ asset('layouts/js/price-range.js') }}"></script>
-<script src="{{ asset('layouts/js/jquery.prettyPhoto.js') }}"></script>
-<script src="{{ asset('layouts/js/main.js') }}"></script>
+<script src="<?php echo e(asset('layouts/js/jquery.js')); ?>"></script>
+<script src="<?php echo e(asset('layouts/js/bootstrap.min.js')); ?>"></script>
+<script src="<?php echo e(asset('layouts/js/jquery.scrollUp.min.js')); ?>"></script>
+<script src="<?php echo e(asset('layouts/js/price-range.js')); ?>"></script>
+<script src="<?php echo e(asset('layouts/js/jquery.prettyPhoto.js')); ?>"></script>
+<script src="<?php echo e(asset('layouts/js/main.js')); ?>"></script>
 </body>
 </html>

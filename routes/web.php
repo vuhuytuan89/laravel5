@@ -50,4 +50,8 @@ Route::get('/admincp/upload', function () {
     return view('admin.product.upload');
 });
 
-Route::post('/cart', 'FontController@cart');
+Route::post('/cart', 'CartController@cart');
+Route::get('/cart', 'CartController@cart');
+Route::post('/clear-cart', 'CartController@postRemoveItem');
+Route::post('/clear-all', 'CartController@postDestroyCart');
+Route::get('/checkout', 'CartController@getCheckOut');

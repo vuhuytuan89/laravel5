@@ -1,19 +1,18 @@
-@extends('layouts.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="features_items"><!--features_items-->
 	<h2 class="title text-center">Features Items</h2>
-	@if (count($listProduct) >0)
-        @foreach($listProduct as $key=>$product)
+	<?php if(count($listProduct) >0): ?>
+        <?php $__currentLoopData = $listProduct; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-sm-4">
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/product1.jpg" alt="" />
-							<h2>{{ number_format($product->price )}} VNĐ</h2>
-							<p>{{ $product->name }}</p>
-							<form method="POST" action="{{ url('cart') }}">
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/product1.jpg" alt="" />
+							<h2><?php echo e(number_format($product->price )); ?> VNĐ</h2>
+							<p><?php echo e($product->name); ?></p>
+							<form method="POST" action="<?php echo e(url('cart')); ?>">
+                                    <input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
+                                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                     <button type="submit" class="btn btn-fefault add-to-cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         Add to cart
@@ -22,11 +21,11 @@
 						</div>
 						<div class="product-overlay" style="display: none;">
 							<div class="overlay-content">
-								<h2>{{ number_format($product->price )}}</h2>
-								<p>{{ $product->name }}</p>
-								 <form method="POST" action="{{url('cart')}}">
-                                    <input type="hidden" name="product_id" value="{{$product->id}}">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<h2><?php echo e(number_format($product->price )); ?></h2>
+								<p><?php echo e($product->name); ?></p>
+								 <form method="POST" action="<?php echo e(url('cart')); ?>">
+                                    <input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
+                                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                     <button type="submit" class="btn btn-fefault add-to-cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         Add to cart
@@ -43,8 +42,8 @@
 					</div>
 				</div>
 			</div>
-        @endforeach
-    @endif
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <?php endif; ?>
 	
 
 </div><!--features_items-->
@@ -65,7 +64,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery1.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery1.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -78,7 +77,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery2.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery2.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -91,7 +90,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery3.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery3.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -104,7 +103,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery4.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery4.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -120,7 +119,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery4.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery4.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -133,7 +132,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery3.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery3.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -146,7 +145,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery2.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery2.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -159,7 +158,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery1.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery1.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -175,7 +174,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery3.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery3.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -188,7 +187,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery4.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery4.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -201,7 +200,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery1.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery1.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -214,7 +213,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery2.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery2.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -230,7 +229,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery1.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery1.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -243,7 +242,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery2.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery2.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -256,7 +255,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery3.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery3.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -269,7 +268,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery4.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery4.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -285,7 +284,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery2.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery2.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -298,7 +297,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery4.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery4.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -311,7 +310,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery3.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery3.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -324,7 +323,7 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/gallery1.jpg" alt="" />
+							<img src="<?php echo e(asset('layouts/images')); ?>/home/gallery1.jpg" alt="" />
 							<h2>$56</h2>
 							<p>Easy Polo Black Edition</p>
 							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -347,7 +346,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="{{ asset('layouts/images') }}/home/recommend1.jpg" alt="" />
+								<img src="<?php echo e(asset('layouts/images')); ?>/home/recommend1.jpg" alt="" />
 								<h2>$56</h2>
 								<p>Easy Polo Black Edition</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -360,7 +359,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="{{ asset('layouts/images') }}/home/recommend2.jpg" alt="" />
+								<img src="<?php echo e(asset('layouts/images')); ?>/home/recommend2.jpg" alt="" />
 								<h2>$56</h2>
 								<p>Easy Polo Black Edition</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -373,7 +372,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="{{ asset('layouts/images') }}/home/recommend3.jpg" alt="" />
+								<img src="<?php echo e(asset('layouts/images')); ?>/home/recommend3.jpg" alt="" />
 								<h2>$56</h2>
 								<p>Easy Polo Black Edition</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -388,7 +387,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="{{ asset('layouts/images') }}/home/recommend1.jpg" alt="" />
+								<img src="<?php echo e(asset('layouts/images')); ?>/home/recommend1.jpg" alt="" />
 								<h2>$56</h2>
 								<p>Easy Polo Black Edition</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -401,7 +400,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="{{ asset('layouts/images') }}/home/recommend2.jpg" alt="" />
+								<img src="<?php echo e(asset('layouts/images')); ?>/home/recommend2.jpg" alt="" />
 								<h2>$56</h2>
 								<p>Easy Polo Black Edition</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -414,7 +413,7 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 							<div class="productinfo text-center">
-								<img src="{{ asset('layouts/images') }}/home/recommend3.jpg" alt="" />
+								<img src="<?php echo e(asset('layouts/images')); ?>/home/recommend3.jpg" alt="" />
 								<h2>$56</h2>
 								<p>Easy Polo Black Edition</p>
 								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -433,4 +432,5 @@
 		</a>
 	</div>
 </div><!--/recommended_items-->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
