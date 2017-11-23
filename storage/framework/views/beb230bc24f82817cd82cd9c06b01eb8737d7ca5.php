@@ -7,7 +7,11 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="<?php echo e(asset('layouts/images')); ?>/home/product1.jpg" alt="" />
+							<?php if($product->image_path): ?>
+								<img src="<?php echo e(asset($product->image_path)); ?>" alt="" />
+							<?php else: ?>
+								<img src="<?php echo e(asset('layouts/images')); ?>/home/product1.jpg" alt="" />
+							<?php endif; ?>
 							<h2><?php echo e(number_format($product->price )); ?> VNĐ</h2>
 							<p><?php echo e($product->name); ?></p>
 							<form method="POST" action="<?php echo e(url('cart')); ?>">

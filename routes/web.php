@@ -55,3 +55,4 @@ Route::get('/cart', 'CartController@cart');
 Route::post('/clear-cart', 'CartController@postRemoveItem');
 Route::post('/clear-all', 'CartController@postDestroyCart');
 Route::get('/checkout', 'CartController@getCheckOut');
+Route::post('/checkout', 'CartController@postCheckOut');

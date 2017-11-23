@@ -8,7 +8,11 @@
 				<div class="product-image-wrapper">
 					<div class="single-products">
 						<div class="productinfo text-center">
-							<img src="{{ asset('layouts/images') }}/home/product1.jpg" alt="" />
+							@if($product->image_path)
+								<img src="{{ asset($product->image_path) }}" alt="" />
+							@else
+								<img src="{{ asset('layouts/images') }}/home/product1.jpg" alt="" />
+							@endif
 							<h2>{{ number_format($product->price )}} VNĐ</h2>
 							<p>{{ $product->name }}</p>
 							<form method="POST" action="{{ url('cart') }}">

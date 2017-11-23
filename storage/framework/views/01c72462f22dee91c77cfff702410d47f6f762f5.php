@@ -17,11 +17,11 @@
                                 <table class="table table-condensed">
                                     <thead>
                                     <tr class="cart_menu">
-                                        <td class="image">Item</td>
-                                        <td class="description"></td>
-                                        <td class="price">Price</td>
-                                        <td class="quantity">Quantity</td>
-                                        <td class="total">Total</td>
+                                        <td class="image">Ảnh minh họa</td>
+                                        <td class="description">Tên sản phẩm</td>
+                                        <td class="price">Giá</td>
+                                        <td class="quantity">Số lượng</td>
+                                        <td class="total">Tổng</td>
                                         <td></td>
                                     </tr>
                                     </thead>
@@ -30,10 +30,11 @@
                                         <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr>
                                                 <td class="cart_product" style="margin: 0px">
-                                                    <a href=""><img
-                                                                width="100px"
-                                                                src="<?php echo e(asset('layouts/images')); ?>/home/product1.jpg"
-                                                                alt=""></a>
+                                                    <?php if($item->options->image_path): ?>
+                                                        <img width="100px" height="100px" src="<?php echo e(asset($item->options->image_path)); ?>" alt="" />
+                                                    <?php else: ?>
+                                                        <img width="100px" height="100px" src="<?php echo e(asset('layouts/images')); ?>/home/product1.jpg" alt="" />
+                                                    <?php endif; ?>
                                                 </td>
                                                 <td class="cart_description">
                                                     <h4><a href=""><?php echo e($item->name); ?></a></h4>
