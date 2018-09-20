@@ -21,15 +21,18 @@ class CartController extends Controller
 
     public function cart()
     {
+
         $this->data['title'] = 'Giỏ hàng của bạn';
         if (Request::isMethod('post')) {
             $product_id = Request::get('product_id');
             //$product = Product::find($product_id);
+
             $product = DB::table('products')
                 ->leftJoin('product_images', 'products.id', '=', 'product_images.product_id')
                 ->select('products.*', 'product_images.image_path')
                 ->where('products.id', '=', $product_id)
                 ->get();
+
             $cartInfo = [
                 'id' => $product_id,
                 'name' => $product[0]->name,
@@ -37,7 +40,8 @@ class CartController extends Controller
                 'qty' => '1',
                 'options' => [
                     'image_path' => $product[0]->image_path
-                ]
+                ],
+                'tax' => 0,
             ];
             Cart::add($cartInfo);
         }
@@ -58,10 +62,11 @@ class CartController extends Controller
             $item = $rows->first();
             Cart::update($item->rowId, $item->qty - 1);
         }
-
+        //echo Cart::tax();
+        // Cart::subtotal();
         $cart = Cart::content();
         $this->data['cart'] = $cart;
-        $this->data['total'] = Cart::total();
+        $this->data['total'] = Cart::subtotal();
         return view('layouts.cart', $this->data);
 
     }
@@ -80,7 +85,7 @@ class CartController extends Controller
             }
         }
         $this->data['cart'] = Cart::content();
-        $this->data['total'] = Cart::total();
+        $this->data['total'] = Cart::subtotal();
         return view('layouts.cart', $this->data);
     }
 
@@ -88,7 +93,7 @@ class CartController extends Controller
     {
         Cart::destroy();
         $this->data['cart'] = Cart::content();
-        $this->data['total'] = Cart::total();
+        $this->data['total'] = Cart::subtotal();
         return view('layouts.cart', $this->data);
     }
 
@@ -96,7 +101,7 @@ class CartController extends Controller
     {
         $this->data['title'] = 'Check out';
         $this->data['cart'] = Cart::content();
-        $this->data['total'] = Cart::total();
+        $this->data['total'] = Cart::subtotal();
         return view('layouts.checkout', $this->data);
     }
 
@@ -130,7 +135,7 @@ class CartController extends Controller
             $bill = new Bill;
             $bill->customer_id = $customer->id;
             $bill->date_order = date('Y-m-d H:i:s');
-            $bill->total = number_format(str_replace(',', '', Cart::total()));
+            $bill->total = str_replace(',', '', Cart::subtotal());
             $bill->note = Request::get('note');
             $bill->save();
 
