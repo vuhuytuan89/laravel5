@@ -54,6 +54,16 @@
                 </a>
             </li>
 
+            <li @if (isset($controllerName) && $controllerName == 'AdminBillController') class="active" @endif>
+                <a href="{{ url('admincp/bill') }}">
+                    <i class="fa fa-envelope"></i> <span>QL Đơn Hàng</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right bg-red">12</small>
+                </span>
+                </a>
+            </li>
+
+
             <li>
                 <a href="#">
                     <i class="fa fa-envelope"></i> <span>Mailbox</span>

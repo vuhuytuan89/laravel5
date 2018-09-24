@@ -64,7 +64,7 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{ url('admincp/product')}}/{{ $product->id }}/edit" class="btn btn-default bg-purple">
+                                            <a href="{{ url('admincp/product')}}/{{ $product->id }}" class="btn btn-default bg-purple">
                                                 <i class="fa fa-edit"></i>
                                                 <span>Edits</span>
                                             </a>
